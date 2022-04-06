@@ -31,7 +31,7 @@ namespace DesafioCientec.App
         {
             services.AddDbContext<FundacaoContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<INotificador, Notificador>();
             services.AddScoped<IFundacaoService, FundacaoService>();
