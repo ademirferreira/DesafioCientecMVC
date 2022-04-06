@@ -8,6 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DesafioCientec.Business.Interfaces;
+using DesafioCientec.Business.Notificacoes;
+using DesafioCientec.Business.Services;
+using DesafioCientec.Data.Context;
+using DesafioCientec.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DesafioCientec.App
 {
@@ -23,6 +29,13 @@ namespace DesafioCientec.App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<FundacaoContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddAutoMapper(typeof(Startup));
+
+            services.AddScoped<INotificador, Notificador>();
+            services.AddScoped<IFundacaoService, FundacaoService>();
+            services.AddScoped<IFundacaoRepository, FundacaoRepository>();
             services.AddControllersWithViews();
         }
 
