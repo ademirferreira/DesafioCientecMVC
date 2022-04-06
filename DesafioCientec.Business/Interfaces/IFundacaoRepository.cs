@@ -5,6 +5,5 @@ namespace DesafioCientec.Business.Interfaces
 {
     public interface IFundacaoRepository : IRepository<Fundacao>
     {
-        Task<Fundacao> BuscarPorDocumento(string documento);
     }
 }

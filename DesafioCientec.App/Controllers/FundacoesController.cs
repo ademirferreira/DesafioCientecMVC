@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DesafioCientec.App.ViewModels;
@@ -27,9 +28,15 @@ namespace DesafioCientec.App.Controllers
         }
 
         [Route("lista-de-fundacoes")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string busca = null)
         {
-            return View(_mapper.Map<IEnumerable<FundacaoViewModel>>(await _fundacaoRepository.ObterTodos()));
+            var fundacoes = _mapper.Map<IEnumerable<FundacaoViewModel>>(await _fundacaoRepository.ObterTodos());
+            if (!string.IsNullOrEmpty(busca))
+            {
+                fundacoes = fundacoes.Where(f => f.Documento.Equals(busca));
+            }
+            
+            return View(fundacoes);
         }
 
         [Route("nova-fundacao")]
