@@ -1,4 +1,4 @@
-﻿using DesafioCientec.App.Models;
+﻿using DesafioCientec.App.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;

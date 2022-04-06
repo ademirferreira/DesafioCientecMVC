@@ -1,6 +1,6 @@
 using System;
 
-namespace DesafioCientec.App.Models
+namespace DesafioCientec.App.ViewModels
 {
     public class ErrorViewModel
     {
