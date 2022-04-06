@@ -23,7 +23,7 @@ namespace DesafioCientec.App.ViewModels
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
 
         public string Telefone { get; set; }
-        [DisplayName("Instituicao Apoiada")]
+        [DisplayName("Instituição Apoiada")]
         public string InstituicaoApoiada { get; set; }
     }
 }

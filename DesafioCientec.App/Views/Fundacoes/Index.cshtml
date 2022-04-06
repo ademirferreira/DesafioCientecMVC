@@ -1,15 +1,16 @@
-﻿@model IEnumerable<FundacaoViewModel>
+﻿@using DesafioCientec.App.Extensions
+@model IEnumerable<FundacaoViewModel>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Lista de Fundações</h1>
 
 <p>
     <a asp-action="Create">Nova Fundação</a>
 </p>
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>
@@ -37,20 +38,20 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Documento)
+                @this.FormataCNPJ(item.Documento)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Telefone)
+                @this.FormataTelefone(item.Telefone.Length, item.Telefone)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.InstituicaoApoiada)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+            <td class="text-right">
+                <a asp-action="Edit" class="btn btn-sm btn-info" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a>
+                <a asp-action="Delete" class="btn btn-sm btn-danger" asp-route-id="@item.Id"><i class="fas fa-trash"></i></a>
             </td>
         </tr>
 }

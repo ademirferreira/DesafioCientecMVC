@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="AutoMapper\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 
 </Project>
