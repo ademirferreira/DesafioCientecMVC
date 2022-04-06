@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DesafioCientec.App.ViewModels;
 using DesafioCientec.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using DesafioCientec.Business.Models;
-using DesafioCientec.Data.Context;
+
 
 namespace DesafioCientec.App.Controllers
 {
@@ -51,6 +48,51 @@ namespace DesafioCientec.App.Controllers
             var fundacao = _mapper.Map<Fundacao>(fundacaoViewModel);
             await _fundacaoService.Adicionar(fundacao);
             if (!OperacaoValida()) return View(fundacaoViewModel);
+            return RedirectToAction("Index");
+        }
+
+        [Route("editar-fundacao/{id:guid}")]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var fornecedorViewModel = _mapper.Map<FundacaoViewModel>(await _fundacaoRepository.ObterPorId(id));
+            if (fornecedorViewModel is null) return NotFound();
+
+            return View(fornecedorViewModel);
+        }
+
+        [Route("editar-fundacao/{id:guid}")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Guid id, FundacaoViewModel fundacaoViewModel)
+        {
+            if (id != fundacaoViewModel.Id) return NotFound();
+            if (!ModelState.IsValid) return View(fundacaoViewModel);
+
+            var fundacao = _mapper.Map<Fundacao>(fundacaoViewModel);
+            await _fundacaoService.Atualizar(fundacao);
+            if (!OperacaoValida()) return View(fundacaoViewModel);
+
+            return RedirectToAction("Index");
+        }
+
+        [Route("excluir-fundacao/{id:guid}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var fornecedorViewModel = _mapper.Map<FundacaoViewModel>(await _fundacaoRepository.ObterPorId(id));
+            if (fornecedorViewModel is null) return NotFound();
+            return View(fornecedorViewModel);
+        }
+
+        [Route("excluir-fundacao/{id:guid}")]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        {
+            var fornecedorViewModel = _mapper.Map<FundacaoViewModel>(await _fundacaoRepository.ObterPorId(id));
+            if (fornecedorViewModel is null) return NotFound();
+
+            await _fundacaoService.Remover(id);
+            TempData["Sucesso"] = "Fundação excluída com sucesso";
             return RedirectToAction("Index");
         }
     }

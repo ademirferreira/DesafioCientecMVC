@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using DesafioCientec.Business.Interfaces;
 using DesafioCientec.Business.Models;
 using DesafioCientec.Data.Context;
@@ -15,6 +16,11 @@ namespace DesafioCientec.Data.Repository
         public async Task<Fundacao> BuscarPorDocumento(string documento)
         {
             return await Db.Fundacoes.AsNoTracking().FirstOrDefaultAsync(f => f.Documento == documento);
+        }
+
+        public override async Task<Fundacao> ObterPorId(Guid id)
+        {
+            return await Db.Fundacoes.AsNoTracking().FirstOrDefaultAsync(f => f.Id == id);
         }
     }
 }
