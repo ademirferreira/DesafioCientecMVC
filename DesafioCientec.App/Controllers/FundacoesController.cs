@@ -55,6 +55,7 @@ namespace DesafioCientec.App.Controllers
             var fundacao = _mapper.Map<Fundacao>(fundacaoViewModel);
             await _fundacaoService.Adicionar(fundacao);
             if (!OperacaoValida()) return View(fundacaoViewModel);
+            TempData["Sucesso"] = "Fundação incluída com sucesso";
             return RedirectToAction("Index");
         }
 
@@ -78,7 +79,7 @@ namespace DesafioCientec.App.Controllers
             var fundacao = _mapper.Map<Fundacao>(fundacaoViewModel);
             await _fundacaoService.Atualizar(fundacao);
             if (!OperacaoValida()) return View(fundacaoViewModel);
-
+            TempData["Sucesso"] = "Fundação editada com sucesso";
             return RedirectToAction("Index");
         }
 

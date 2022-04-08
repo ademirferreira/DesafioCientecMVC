@@ -11,11 +11,11 @@
 <form asp-controller="Fundacoes" asp-action="Index" class="form-inline">
     <div class="form-group mb-2">
         <input class="form-control" type="text" name="busca" placeholder="CNPJ" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
+        <button class="btn btn-success" type="submit">Buscar</button>
     </div>
 </form>
 <table class="table table-hover">
-    <thead>
+    <thead class="thead-dark">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nome)
@@ -53,13 +53,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.InstituicaoApoiada)
             </td>
-            <td class="text-right">
-                <a asp-action="Edit" class="btn btn-sm btn-info" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a>
-                <a asp-action="Delete" class="btn btn-sm btn-danger" asp-route-id="@item.Id"><i class="fas fa-trash"></i></a>
+            <td>
+                <div class="btn-group" role="group">
+                    <a asp-action="Edit" class="btn btn-sm btn-info mr-2" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a>
+                    <a asp-action="Delete" class="btn btn-sm btn-danger" asp-route-id="@item.Id"><i class="fas fa-trash"></i></a>
+                </div>
+                
             </td>
         </tr>}
     </tbody>
 </table>
 <p class="text-right">
-    <a class="btn btn-info" asp-action="Create">Nova Fundação</a>
+    <a class="btn btn-primary" asp-action="Create">Nova Fundação</a>
 </p>
